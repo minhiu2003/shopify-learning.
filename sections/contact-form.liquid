@@ -1,0 +1,55 @@
+{% form 'contact' %}
+  <div class="max-w-md p-4 mx-auto space-y-4">
+    {% if form.posted_successfully? %} Thank you for your contact {% endif %}
+    {{ form.errors | default_errors }}
+    <p>
+      <label for="ContactFormName" class="field-label field-block">
+        Name
+        <input type="text" id="ContactFormName" name="contact[name]" class="field-input">
+      </label>
+    </p>
+    <p>
+      <label for="ContactFormEmail" class="field-label field-block">
+        Email
+        <input type="email" id="ContactFormEmail" name="contact[email]" class="field-input">
+      </label>
+    </p>
+    <p>
+      <label for="ContactFormPhone" class="field-label field-block">
+        Phone
+        <input type="tel" id="ContactFormPhone" name="contact[phone]" class="field-input">
+      </label>
+    </p>
+    <p>
+      <label for="ContactFormMessage" class="field-label field-block">
+        Message
+        <textarea rows="10" id="ContactFormMessage" name="contact[body]" class="field-textarea"></textarea>
+      </label>
+    </p>
+    <input type="submit" value="send" class="btn">
+  </div>
+{% endform %}
+
+{% schema %}
+{
+  "name": "Contact form",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Contact form",
+      "label": "Heading"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact form"
+    }
+  ]
+}
+{% endschema %}

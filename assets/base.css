@@ -1,0 +1,812 @@
+:root {
+  --c-text-light: #d1d5db; /* TW colors.gray.300 */
+  --c-text-medium: #4b5563; /* TW colors.gray.600 */
+  --c-text-dark: #111827; /* TW colors.gray.900 */
+  --c-primary-light: #dbeafe; /* TW colors.blue.100 */
+  --c-primary-medium: #2563eb; /* TW colors.blue.600 */
+  --c-primary-dark: #1e3a8a; /* TW colors.blue.900 */
+  --c-link-dark: #1e3a8a; /* TW colors.blue.900 */
+  --c-link: #2563eb; /* TW colors.blue.600 */
+  --c-border: #d1d5db; /* TW colors.gray.300 */
+  --c-disabled: #6b7280; /* TW colors.gray.500 */
+  --c-success-bg: #bbf7d0; /* TW colors.green.200 */
+  --c-success: #16a34a; /* TW colors.green.600 */
+  --c-error-bg: #fecaca; /* TW colors.red.200 */
+  --c-error: #dc2626; /* TW colors.red.600 */
+
+  --page-pad: 4vw;
+
+  --duration-short: 100ms;
+  --duration-default: 200ms;
+  --duration-medium: 300ms;
+  --duration-long: 500ms;
+
+  --input-accent-light: #eff6ff;
+  --input-accent-medium: #1e3a8a;
+  --input-accent-dark: #172554;
+  --input-background: #fff;
+  --input-border-color: #9ca3af;
+  --input-border-width: 1px;
+  --input-error-background: #fef2f2;
+  --input-error: #991b1b;
+  --input-line-height: 1.5rem;
+  --input-pad-x: 0.75rem;
+  --input-pad-y: 0.5rem;
+  --input-radius: 4px;
+  --input-text-light: #6b7281;
+  --input-text-medium: #364151;
+  --input-text-xs: 0.75rem;
+  --input-text-sm: 0.875rem;
+  --input-text-md: 1rem;
+  --input-transition-speed: 200ms;
+}
+
+/**
+ * Defaults and resets
+ */
+body,
+figure {
+  color: var(--c-text-medium);
+  margin: 0;
+}
+
+a {
+  color: var(--c-primary-medium);
+}
+a:hover {
+  color: var(--c-primary-dark);
+}
+a:not([href]),
+a[href=''] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+input,
+select,
+button {
+  font-size: 1rem;
+}
+
+button {
+  -webkit-appearance: button;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+pre {
+  background-color: rgba(0, 0, 0, 10%);
+  padding: 0.5rem;
+  overflow: scroll;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: var(--c-border);
+}
+
+/**
+ * Typography
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+.h0,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
+  font-weight: 600;
+  color: var(--c-text-dark);
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+.h0 {
+  font-size: 2.5rem; /* 40px */
+}
+
+h1,
+.h1 {
+  font-size: 1.875rem; /* 30px */
+}
+
+h2,
+.h2 {
+  font-size: 1.75rem; /* 28px */
+}
+
+h3,
+.h3 {
+  font-size: 1.25rem; /* 20px */
+}
+
+h4,
+.h4 {
+  font-size: 1.125rem; /* 18px */
+}
+
+h5,
+.h5 {
+  font-size: 1rem; /* 16px */
+}
+
+@media only screen and (min-width: 768px) {
+  .h0 {
+    font-size: 3.25rem; /* 52px */
+  }
+  h1,
+  .h1 {
+    font-size: 2.5rem; /* 40px */
+  }
+  h2,
+  .h2 {
+    font-size: 1.875rem; /* 30px */
+  }
+  h3,
+  .h3 {
+    font-size: 1.5rem; /* 24px */
+  }
+}
+
+.text-caps {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/**
+ * Common layout
+ */
+.section-pt-sm {
+  padding-top: 2rem;
+}
+.section-pt-md {
+  padding-top: 3rem;
+}
+.section-pt-lg {
+  padding-top: 4rem;
+}
+.section-pb-sm {
+  padding-bottom: 2rem;
+}
+.section-pb-md {
+  padding-bottom: 3rem;
+}
+.section-pb-lg {
+  padding-bottom: 4rem;
+}
+
+.section-border {
+  border-bottom: 1px solid var(--c-border);
+}
+
+@media (min-width: 1024px) {
+  .section-pt-sm {
+    padding-top: 3rem;
+  }
+  .section-pt-md {
+    padding-top: 4.5rem;
+  }
+  .section-pt-lg {
+    padding-top: 6rem;
+  }
+  .section-pb-sm {
+    padding-bottom: 3rem;
+  }
+  .section-pb-md {
+    padding-bottom: 4.5rem;
+  }
+  .section-pb-lg {
+    padding-bottom: 6rem;
+  }
+}
+
+.page-width {
+  max-width: var(--page-width, 1440px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--page-pad);
+  padding-right: var(--page-pad);
+}
+
+.content-2xl {
+  max-width: 70rem; /* 1120px */
+}
+.content-xl {
+  max-width: 60rem; /* 960px */
+}
+.content-lg {
+  max-width: 50rem; /* 800px */
+}
+.content-md {
+  max-width: 46rem; /* 736px */
+}
+.content-sm {
+  max-width: 40rem; /* 640px */
+}
+
+/**
+ * RTE - Wrapper for rich text editor
+ */
+.rte h1,
+.rte h2,
+.rte h3,
+.rte h4,
+.rte h5,
+.rte h6 {
+  margin-top: 1.25em;
+  margin-bottom: 1rem;
+}
+
+.rte > p:first-child {
+  margin-top: 0;
+}
+
+.rte > p:last-child {
+  margin-bottom: 0;
+}
+
+.rte ul,
+.rte ol {
+  padding-left: 1.5rem;
+}
+
+.rte li {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  list-style: inherit;
+}
+
+/* Account for editor adding paragraphs to li */
+.rte li > p:first-child {
+  margin-top: 0;
+}
+.rte li > p:last-child {
+  margin-bottom: 0;
+}
+
+.rte hr {
+  margin: 3em 0;
+}
+
+/**
+ * Header
+ */
+.section-header {
+  background-color: #fff;
+  top: 0;
+  z-index: 10;
+}
+
+.sticky-header-hidden,
+.sticky-header-stuck {
+  transition: all var(--duration-medium) ease-out;
+}
+
+.sticky-header-hidden {
+  transform: translateY(-100%);
+}
+
+.sticky-header-stuck {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  transform: translateY(0);
+}
+
+/* Nav menu */
+.nav-menu > li {
+  display: inline-block;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  position: relative;
+}
+
+/* Drop down menus */
+.nav-submemu {
+  background: #fff;
+  display: none;
+  left: 0;
+  list-style-type: none;
+  padding: 0.5rem 0;
+  position: absolute;
+  text-align-last: left;
+  top: 100%;
+  z-index: 1;
+}
+
+.nav-submemu a {
+  display: block;
+  padding: 0.5rem 0.7rem;
+}
+
+.nav-menu > li:hover .nav-submemu {
+  display: block;
+  z-index: 100;
+}
+
+/**
+ * Buttons
+ */
+.btn {
+  appearance: none;
+  background-color: var(--input-accent-medium);
+  border-color: var(--input-accent-medium);
+  border-radius: var(--input-radius);
+  border-style: solid;
+  border-width: var(--input-border-width);
+  color: var(--input-accent-light);
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: var(--input-text-md);
+  line-height: var(--input-line-height);
+  padding: var(--input-pad-y) calc(var(--input-pad-x) * 2);
+  text-decoration: none;
+  transition: all var(--input-transition-speed) ease-in-out;
+}
+.btn:hover,
+.btn:focus,
+.btn:active {
+  background-color: var(--input-accent-dark);
+}
+
+.btn--outlined {
+  background-color: transparent;
+  border-color: var(--input-accent-medium);
+  color: var(--input-accent-medium);
+}
+.btn--outlined:hover,
+.btn--outlined:focus,
+.btn--outlined:active {
+  background-color: var(--input-accent-light);
+  border-color: var(--input-accent-dark);
+  color: var(--input-accent-dark);
+}
+
+.btn-link {
+  background-color: transparent;
+  color: var(--c-link);
+  /* For use on a <button> */
+  margin: 0;
+  padding: 0;
+}
+.btn-link:hover {
+  color: var(--c-link-dark);
+}
+
+/**
+ * Form elements
+ */
+[class^='field'] {
+  /* Using transition all here causes CLS */
+  transition: box-shadow var(--input-transition-speed) ease, outline var(--input-transition-speed) ease,
+    outline-offset var(--input-transition-speed) ease, border var(--input-transition-speed) ease,
+    color var(--input-transition-speed) ease;
+}
+
+.field-label {
+  color: var(--input-text-medium);
+  font-size: var(--input-text-sm);
+}
+
+.field-help {
+  color: var(--input-text-light);
+  font-size: var(--input-text-xs);
+}
+
+.field-input,
+.field-textarea,
+.field-select {
+  appearance: none;
+  background-color: var(--input-background);
+  border-color: var(--input-border-color);
+  border-radius: var(--input-radius);
+  border-style: solid;
+  border-width: var(--input-border-width);
+  font-family: inherit;
+  font-size: var(--input-text-md);
+  line-height: var(--input-line-height);
+  padding: var(--input-pad-y) var(--input-pad-x);
+}
+
+.field-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+/* Checkbox and radio */
+.field-checkbox,
+.field-radio {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  background-origin: border-box;
+  border: 1px solid var(--input-border-color);
+  color: var(--input-accent-medium);
+  cursor: pointer;
+  display: inline-block;
+  flex-shrink: 0;
+  height: 1rem;
+  padding: 0;
+  width: 1rem;
+}
+
+.field-checkbox:checked,
+.field-radio:checked {
+  background-color: currentColor;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border-color: transparent;
+}
+
+.field-checkbox {
+  border-radius: var(--input-radius);
+}
+
+.field-radio {
+  border-radius: 100%;
+}
+
+.field-checkbox:checked {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+}
+
+.field-radio:checked {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+}
+
+label:has(.field-checkbox),
+label:has(.field-radio) {
+  display: flex;
+  gap: 0.25rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.field-error {
+  color: var(--input-error);
+}
+.field-input[aria-invalid],
+.field-textarea[aria-invalid],
+.field-select[aria-invalid] {
+  border-color: var(--input-error);
+  background-color: var(--input-error-background);
+}
+
+/* Shared focus styles */
+.btn:active,
+.btn:focus,
+.field-input:active,
+.field-input:focus,
+.field-textarea:active,
+.field-textarea:focus,
+.field-select:active,
+.field-select:focus,
+.field-checkbox:focus,
+.field-radio:focus {
+  box-shadow: 0 0 0 2px var(--input-background), 0 0 0 calc(2px + 2px) var(--input-accent-medium);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.field-input:active,
+.field-textarea:active,
+.field-select:active,
+.field-checkbox:active,
+.field-radio:active {
+  background-color: var(--input-accent-light);
+}
+
+fieldset {
+  border-color: var(--input-border-color);
+  border-radius: var(--input-radius);
+  border-width: var(--input-border-width);
+  padding: calc(var(--input-pad-x) / 4) var(--input-pad-x) var(--input-pad-x) var(--input-pad-x);
+}
+
+legend {
+  color: var(--input-text-medium);
+  font-size: var(--input-text-sm);
+  padding: 0 0.5rem;
+}
+
+/* Form block, input full width.*/
+.field-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/*
+Field stack
+- To have label appear as placeholder, and transition when the input is focused or has content
+- Require the input to have a placeholder attribute and the label to come after the input
+*/
+.field-stack {
+  position: relative;
+}
+
+.field-stack input ~ .field-label,
+.field-stack textarea ~ .field-label,
+.field-stack select ~ .field-label {
+  background: rgba(255, 255, 255, 0);
+  border-radius: 0.25rem;
+  font-size: var(--input-text-md);
+  line-height: var(--input-line-height);
+  padding: var(--input-pad-y) var(--input-pad-x);
+  transform: translateY(0);
+  transition: all var(--input-transition-speed) ease;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.field-stack input:focus ~ .field-label,
+.field-stack input:not(:placeholder-shown) ~ .field-label,
+.field-stack input:-webkit-autofill ~ .field-label,
+.field-stack textarea:focus ~ .field-label,
+.field-stack textarea:not(:placeholder-shown) ~ .field-label,
+.field-stack textarea:-webkit-autofill ~ .field-label,
+.field-stack select ~ .field-label {
+  background: var(--input-background);
+  font-size: var(--input-text-xs);
+  left: calc(var(--input-pad-x) - 0.25rem + var(--input-border-width));
+  padding: 0 0.25rem;
+  transform: translateY(-55%);
+}
+
+.field-stack input::placeholder,
+.field-stack textarea::placeholder {
+  opacity: 0;
+}
+
+/**
+ * Form errors output by {{ form.errors | default_errors }}
+ * Aligns with .banner styles
+ * https://shopify.dev/docs/liquid/reference/objects/form#form-errors
+ */
+.errors {
+  background-color: var(--c-error-bg);
+  border-left-color: var(--c-error);
+  border-left-style: solid;
+  border-left-width: 3px;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  padding: 1.2rem;
+}
+.errors *:first-child {
+  margin-top: 0;
+}
+.errors *:last-child {
+  margin-bottom: 0;
+}
+
+/**
+ * Pagination output by {{ paginate | default_pagination }}
+ * https://shopify.dev/docs/liquid/reference/objects/paginate
+ */
+.prev a,
+.next a,
+.page a,
+.current,
+.deco {
+  display: inline-block;
+  padding: 0.5rem;
+}
+
+.prev {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.next {
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+.current {
+  font-weight: bold;
+}
+
+.deco {
+  color: var(--c-text-light);
+}
+
+/**
+ * CSS Loading Indicator
+ * No extra markup needed, just add a class of loading to an element.
+ */
+.loading {
+  min-height: 24px;
+  min-width: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+.loading::before,
+.loading::after {
+  content: '';
+  display: block;
+}
+
+.loading::before {
+  backdrop-filter: blur(2px);
+  background: rgba(255, 255, 255, 0.8);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.loading::after {
+  animation: loading-spin 1s infinite linear;
+  border-color: rgba(26, 115, 232, 0.2);
+  border-bottom-color: rgba(26, 115, 232, 1);
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 4px;
+  height: 24px;
+  left: 50%;
+  margin-left: -12px;
+  margin-top: -12px;
+  position: absolute;
+  top: 50%;
+  width: 24px;
+  z-index: 2;
+}
+
+@keyframes loading-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/**
+ * Additional utility classes
+ */
+.button-unstyled {
+  margin: 0;
+  background-color: transparent;
+  background-image: none;
+  padding: 0;
+}
+
+.list-unstyled {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.placeholder-svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Account for JavaScript disabled */
+.js-enabled {
+  display: none;
+}
+
+.js .js-enabled {
+  display: inherit;
+}
+
+/**
+ * Animations
+ */
+.animate--zoom-in {
+  --zoom-in-ratio: 1;
+  --transform-out-ratio: 0;
+}
+
+.animate--zoom-in > img,
+.animate--zoom-in > picture,
+.animate--zoom-in > svg {
+  display: block;
+  scale: var(--zoom-in-ratio);
+  transform: translateY(calc(var(--transform-out-ratio) * 1px));
+  transition: scale var(--duration-short) linear;
+}
+
+/**
+ * Iframes for video embeds
+ */
+.iframe-video {
+  overflow: hidden;
+  padding-top: var(--aspect-ratio, 56.25%);
+  position: relative;
+  width: 100%;
+}
+.iframe-video iframe {
+  border: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+/**
+ * Dialog modals
+ */
+dialog {
+  max-height: 90dvh;
+  max-width: 90dvw;
+  padding: 0;
+  width: 40rem;
+}
+
+.dialog-content {
+  max-height: 90dvh;
+  max-width: 95dvw;
+  overflow: auto;
+  padding: 3rem 1rem;
+}
+
+.dialog-close {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  z-index: 1;
+}
+
+dialog[open] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+dialog {
+  opacity: 0;
+  transform: translateY(10%);
+  transition: opacity 250ms ease-out, transform 250ms ease-out, overlay 250ms ease-out allow-discrete,
+    display 250ms ease-out allow-discrete;
+  /* Equivalent to: transition: all 250ms allow-discrete; */
+}
+
+@starting-style {
+  dialog[open] {
+    opacity: 0;
+    transform: translateY(10%);
+  }
+}
+
+dialog::backdrop {
+  background-color: rgb(0 0 0 / 0%);
+  transition: display 250ms allow-discrete, overlay 250ms allow-discrete, background-color 250ms;
+  /* Equivalent to: transition: all 250ms allow-discrete; */
+}
+
+dialog[open]::backdrop {
+  background-color: rgb(0 0 0 / 50%);
+}
+
+@starting-style {
+  dialog[open]::backdrop {
+    background-color: rgb(0 0 0 / 0%);
+  }
+}

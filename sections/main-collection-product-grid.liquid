@@ -1,0 +1,73 @@
+<div class="page-width">
+  {%- paginate collection.products by section.settings.products_per_page -%}
+    <div id="ProductGridContainer">
+      {%- if collection.products.size == 0 -%}
+        <div id="product-grid" data-id="{{ section.id }}">
+          <div>
+            <h2>{{ 'sections.collection_template.empty' | t -}}</h2>
+          </div>
+        </div>
+      {%- else -%}
+        <div>
+          <ul
+            id="product-grid"
+            data-id="{{ section.id }}"
+            class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 list-unstyled"
+            role="list"
+          >
+            {%- for product in collection.products -%}
+              {% assign lazy_load = false %}
+              {%- if forloop.index > 2 -%}
+                {%- assign lazy_load = true -%}
+              {%- endif -%}
+              <li>
+                {% render 'product-card',
+                  product: product,
+                  show_vendor: section.settings.show_vendor,
+                  show_rating: section.settings.show_rating,
+                  lazy_load: lazy_load,
+                  section_id: section.id
+                %}
+              </li>
+            {%- endfor -%}
+          </ul>
+
+          {%- if paginate.pages > 1 -%}
+            {% render 'pagination', paginate: paginate, anchor: '' %}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-collection-product-grid.name",
+  "class": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 36,
+      "step": 4,
+      "default": 16,
+      "label": "t:product-card.settings.products_per_page.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": true,
+      "label": "t:product-card.settings.show_vendor.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": false,
+      "label": "t:product-card.settings.show_rating.label",
+      "info": "t:product-card.settings.show_rating.info"
+    }
+  ]
+}
+{% endschema %}

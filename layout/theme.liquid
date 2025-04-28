@@ -1,0 +1,61 @@
+<!doctype html>
+<html class="font-sans antialiased text-gray-700" lang="{{ shop.locale }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {%- render 'meta-tags' -%}
+
+    <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
+
+    {{ content_for_header }}
+
+    {% style %}
+      :root {
+        --page-width: {{ settings.page_width }}px;
+      }
+    {% endstyle %}
+
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'tailwind.min.css' | asset_url | stylesheet_tag }}
+
+    {%- comment -%}
+      Make string translations and money formate available to scripts.
+    {%- endcomment -%}
+    <script>
+      window.theme = {
+        strings: {
+          addToCart: {{ 'products.product.add_to_cart' | t | json }},
+          soldOut: {{ 'products.product.sold_out' | t | json }},
+          unavailable: {{ 'products.product.unavailable' | t | json }}
+        },
+        moneyFormat: {{ shop.money_format | json }}
+      };
+    </script>
+  </head>
+  <body class="py-8">
+    {% sections 'header-group' %}
+
+    <main role="main">
+      {{ content_for_layout }}
+    </main>
+
+    {%- section 'footer' -%}
+  </body>
+</html>

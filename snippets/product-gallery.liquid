@@ -1,0 +1,24 @@
+{% comment %}
+  Renders a product media gallery.
+
+  Accepts:
+  - product: {Object} Product liquid object
+
+  Usage:
+  {% render 'product-gallery' %}
+{% endcomment %}
+
+<product-gallery>
+  <ul class="product-gallery list-unstyled">
+    {%- if product.selected_or_first_available_variant.featured_media != null -%}
+      {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
+      {% render 'product-gallery-item', media: featured_media %}
+    {%- endif -%}
+
+    {% for media in product.media %}
+      {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
+        {% render 'product-gallery-item', media: media %}
+      {%- endunless -%}
+    {% endfor %}
+  </ul>
+</product-gallery>

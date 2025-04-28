@@ -1,0 +1,71 @@
+{% schema %}
+    {
+      "name": "Scrolling Banner",
+      "settings": [],
+      "blocks": [
+        {
+          "type": "text_item",
+          "name": "Text Item",
+          "settings": [
+            {
+              "type": "text",
+              "id": "text",
+              "label": "Thông báo",
+              "default": "FREE SHIPPING FOR ALL ORDER ABOVE $99"
+            }
+          ]
+        }
+      ],
+      "max_blocks": 10,
+      "presets": [
+        {
+          "name": "Scrolling Banner",
+          "blocks": [
+            {
+              "type": "text_item",
+              "settings": {
+                "text": "INNOVATIVE DESIGN"
+              }
+            },
+            {
+              "type": "text_item",
+              "settings": {
+                "text": "FREE SHIPPING FOR ALL ORDER ABOVE $99"
+              }
+            },
+            {
+              "type": "text_item",
+              "settings": {
+                "text": "ADVANCED TECHNOLOGY"
+              }
+            },
+            {
+              "type": "text_item",
+              "settings": {
+                "text": "PREMIUM QUALITY PRODUCTS"
+              }
+            }
+          ]
+        }
+      ]
+    }
+{% endschema %}
+    
+    <style>
+      @keyframes scrollBanner {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+    </style>
+    
+    <div class="overflow-hidden bg-[#2E3833] text-white">
+      <div class="flex whitespace-nowrap animate-scrollBanner px-4 py-2 font-semibold text-sm tracking-wide"
+           style="animation: scrollBanner 20s linear infinite;">
+        {% for i in (1..2) %}
+          {% for block in section.blocks %}
+            <div class="px-6">{{ block.settings.text }}</div>
+          {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+    

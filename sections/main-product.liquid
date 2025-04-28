@@ -1,0 +1,205 @@
+<script src="{{ 'product.js' | asset_url }}" defer="defer"></script>
+
+{{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+
+<product-purchase
+  id="MainProduct-{{ section.id }}"
+  data-section="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-update-url="true"
+  data-url="{{ product.url }}"
+>
+  <div class="page-width">
+    {%- assign product_intro = section.blocks | where: 'type', 'intro' %}
+    {%- for block in product_intro -%}
+      {% render 'product-intro', product: product, display_on: 'mobile' %}
+    {%- endfor -%}
+
+    <div class="lg:grid lg:grid-cols-5 lg:gap-8">
+      <div class="text-center lg:col-span-3">
+        {% render 'product-gallery' %}
+      </div>
+
+      <div class="lg:col-span-2">
+        <div class="sticky space-y-4 copy top-8">
+          {%- assign product_form_id = 'product-form-' | append: section.id -%}
+
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when '@app' -%}
+                {% render block %}
+
+              {%- when 'intro' -%}
+                <div {{ block.shopify_attributes }}>
+                  {% render 'product-intro', product: product, display_on: 'desktop' %}
+                </div>
+
+              {%- when 'title' -%}
+                <div class="product__title" {{ block.shopify_attributes }}>
+                  <h1>{{ product.title | escape }}</h1>
+                </div>
+
+              {%- when 'price' -%}
+                <div {{ block.shopify_attributes }}>
+                  <div id="price-{{ section.id }}" role="status">
+                    <p>
+                      {% if product.price_varies %}
+                        {{ product.price_min | money }} - {{ product.price_max | money }}
+                      {% else %}
+                        {{ product.price | money }}
+                      {% endif %}
+                    </p>
+                  </div>
+                  <div>
+                    {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
+                    {%- form 'product', product, id: product_form_installment_id, class: 'installment' -%}
+                      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                      {{ form | payment_terms }}
+                    {%- endform -%}
+                  </div>
+                </div>
+
+              {%- when 'quantity_select' -%}
+                <div {{ block.shopify_attributes }}>
+                  <label>
+                    <span class="field-label">Quantity</span>
+                    <input
+                      class="field-input"
+                      type="number"
+                      name="quantity"
+                      min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                      {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+                        max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                      {% endif %}
+                      step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+                      value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                      form="{{ product_form_id }}"
+                    >
+                  </label>
+                </div>
+
+              {%- when 'variant_select' -%}
+                {% render 'product-variant-select', product: product, block: block, product_form_id: product_form_id %}
+
+              {%- when 'buy_buttons' -%}
+                {%- render 'buy-buttons',
+                  block: block,
+                  product: product,
+                  product_form_id: product_form_id,
+                  section_id: section.id
+                -%}
+
+              {%- when 'description' -%}
+                {%- if product.description != blank -%}
+                  <div class="rte" {{ block.shopify_attributes }}>
+                    {{ product.description }}
+                  </div>
+                {%- endif -%}
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</product-purchase>
+
+<script type="application/ld+json">
+  {{ product | structured_data }}
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.main-product.name",
+  "tag": "section",
+  "class": "section",
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "intro",
+      "name": "Product intro",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Title, subtitle, and reviews summary",
+          "info": "Displays above the product images on mobile, to the side on desktop."
+        }
+      ]
+    },
+    {
+      "type": "title",
+      "name": "t:sections.main-product.blocks.title.name",
+      "limit": 1
+    },
+    {
+      "type": "description",
+      "name": "t:sections.main-product.blocks.description.name",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "t:sections.main-product.blocks.price.name",
+      "limit": 1
+    },
+    {
+      "type": "quantity_select",
+      "name": "t:sections.main-product.blocks.quantity_select.name",
+      "limit": 1
+    },
+    {
+      "type": "variant_select",
+      "name": "t:sections.main-product.blocks.variant_select.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "select_type",
+          "info": "Single variant selector. (Use Options select if your product(s) have multiple options)",
+          "options": [
+            {
+              "value": "dropdown",
+              "label": "t:sections.main-product.blocks.variant_select.settings.select_type.options__1.label"
+            },
+            {
+              "value": "button",
+              "label": "t:sections.main-product.blocks.variant_select.settings.select_type.options__2.label"
+            }
+          ],
+          "default": "dropdown",
+          "label": "t:sections.main-product.blocks.variant_select.settings.select_type.label"
+        }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "t:sections.main-product.blocks.buy_buttons.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_dynamic_checkout",
+          "default": true,
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
+          "info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_gift_card_recipient",
+          "default": true,
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
+          "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.main-product.settings.header.content",
+      "info": "t:sections.main-product.settings.header.info"
+    }
+  ]
+}
+{% endschema %}

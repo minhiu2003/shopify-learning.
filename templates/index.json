@@ -1,0 +1,69 @@
+{
+  "sections": {
+    "hero_banner": {
+      "type": "hero-banner",
+      "blocks": {
+        "heading_74dpCk": {
+          "type": "heading",
+          "settings": {
+            "heading": "Hero Banner",
+            "heading_size": "text-3xl"
+          }
+        },
+        "text_jpAPVk": {
+          "type": "text",
+          "settings": {
+            "text": "Provide a catchy description to capture customers attention.",
+            "text_style": "text-base"
+          }
+        },
+        "button_kajMGD": {
+          "type": "button",
+          "settings": {
+            "button_label": "Learn more",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_74dpCk",
+        "text_jpAPVk",
+        "button_kajMGD"
+      ],
+      "settings": {
+        "height": "h-[600px] md:h-[750px]",
+        "desktop_content_position": "md:justify-start md:items-start",
+        "content_alignment": "text-left",
+        "content_theme": "light",
+        "content_background_opacity": 90,
+        "content_max_width": 520,
+        "accessibility_label": "This is a hero banner"
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Featured collection",
+        "description": "<p>From the customizer</p>",
+        "show_description": true,
+        "collection": "test-products",
+        "products_to_show": 8,
+        "show_view_all": true,
+        "show_vendor": true,
+        "show_rating": false
+      }
+    },
+    "email_signup": {
+      "type": "email-signup",
+      "settings": {
+        "headline": "Subscribe to our emails",
+        "description": ""
+      }
+    }
+  },
+  "order": [
+    "hero_banner",
+    "featured_collection",
+    "email_signup"
+  ]
+}

@@ -1,0 +1,90 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "intro": {
+          "type": "intro",
+          "settings": {
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+          }
+        },
+        "variant_select": {
+          "type": "variant_select",
+          "settings": {
+            "select_type": "dropdown"
+          }
+        },
+        "quantity_select": {
+          "type": "quantity_select",
+          "settings": {
+          }
+        },
+        "recharge_subscriptions_subscription_widget_4HJdGb": {
+          "type": "shopify:\/\/apps\/recharge-subscriptions\/blocks\/subscription-widget\/371eed76-0b44-4869-9813-730372ea378e",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        }
+      },
+      "block_order": [
+        "intro",
+        "price",
+        "variant_select",
+        "quantity_select",
+        "recharge_subscriptions_subscription_widget_4HJdGb",
+        "buy_buttons"
+      ],
+      "settings": {
+      }
+    },
+    "1715788398f5a9d7ec": {
+      "type": "apps",
+      "blocks": {
+        "yotpo_product_reviews_ugc_reviews_4EKHnJ": {
+          "type": "shopify:\/\/apps\/yotpo-product-reviews-ugc\/blocks\/reviews\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{product}}"
+          }
+        }
+      },
+      "block_order": [
+        "yotpo_product_reviews_ugc_reviews_4EKHnJ"
+      ],
+      "settings": {
+      }
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "show_product_recommendations": true,
+        "heading": "You might also like"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1715788398f5a9d7ec",
+    "recommendations"
+  ]
+}

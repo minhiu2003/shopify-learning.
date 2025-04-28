@@ -1,0 +1,112 @@
+{% assign bg_image = section.settings.background_image | img_url: 'master' %}
+
+<div class="image-with-text-section grid grid-cols-2 md:grid-cols-4 gap-4 items-center my-12" style="background-image: url('{{ bg_image }}'); background-size: cover; background-position: center;">
+  
+  <!-- Cột 1: Trống -->
+  <div></div>
+
+  <!-- Cột 2: Ảnh -->
+  {% if section.settings.image != blank %}
+    <div class="flex justify-center">
+      {% if section.settings.image_url != blank %}
+        <a href="{{ section.settings.image_url }}">
+          <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.title | escape }}" class="w-[300px] h-auto object-cover">
+        </a>
+      {% else %}
+        <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.title | escape }}" class="w-[300px] h-auto object-cover">
+      {% endif %}
+    </div>
+  {% endif %}
+
+
+
+  <!-- Cột 4: Text -->
+  <div class="flex flex-col justify-center p-8 text-center md:text-left">
+    {% if section.settings.title != blank %}
+      <h2 class="text-4xl font-bold mb-4">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    {% if section.settings.subtitle != blank %}
+      <p class="text-lg mb-6">{{ section.settings.subtitle }}</p>
+    {% endif %}
+
+    {% if section.settings.cta_text != blank and section.settings.cta_url != blank %}
+      <a href="{{ section.settings.cta_url }}" class="inline-block text-2xl w-48 bg-black text-white py-3 px-8 rounded hover:bg-gray-800 transition">
+        {{ section.settings.cta_text }}
+      </a>
+    {% endif %}
+  </div>
+
+</div>
+
+
+{% schema %}
+  {
+    "name": "Image with Text (Custom)",
+    "tag": "section",
+    "class": "section-image-with-text",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Your Title Here"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle",
+        "default": "Your subtitle or description."
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Button Text",
+        "default": "Shop Now"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "CTA Button URL"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Select Image"
+      },
+      {
+        "type": "url",
+        "id": "image_url",
+        "label": "Optional Image Link (when clicked)"
+      },
+      {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "select",
+        "id": "image_position",
+        "label": "Image Position",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "left"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image with Text (Custom)",
+        "category": "Custom Sections"
+      }
+    ]
+  }
+  {% endschema %}
+  
