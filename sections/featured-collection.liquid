@@ -31,20 +31,40 @@
     </a>
   {%- endif -%}
 
-  <ul class="grid grid-cols-2 gap-4 p-4 md:grid-cols-3 lg:grid-cols-4 list-unstyled">
-    {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
-      <li>
-        {% render 'product-card',
-          product: product,
-          show_vendor: section.settings.show_vendor,
-          show_rating: section.settings.show_rating,
-          lazy_load: true,
-          section_id: section.id
-        %}
-      </li>
-    {%- endfor -%}
-    
-  </ul>
+  <!-- Swiper Container -->
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      {%- for product in section.settings.collection.products limit: 4 -%} <!-- Hiển thị tối đa 4 sản phẩm -->
+        <div class="swiper-slide bg-white p-4 shadow-md rounded-lg">
+          {% render 'product-card',
+            product: product,
+            show_vendor: section.settings.show_vendor,
+            show_rating: section.settings.show_rating,
+            lazy_load: true,
+            section_id: section.id
+          %}
+
+          <!-- Thêm nút "Mua ngay" -->
+          <div class="mt-4 text-center">
+            <a 
+              href="{{ product.url }}" 
+              class="inline-block bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition duration-300"
+              aria-label="Mua ngay {{ product.title }}"
+            >
+              Mua ngay
+            </a>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <!-- Các nút điều khiển swiper -->
+    <div class="swiper-button-next">next</div>
+    <div class="swiper-button-prev">prev</div>
+
+    <!-- Thêm phân trang (dots) -->
+    <div class="swiper-pagination"></div>
+  </div>
 </div>
 
 {% schema %}
