@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
     <title>
       {{ page_title }}
@@ -58,4 +59,33 @@
 
     {%- section 'footer' -%}
   </body>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+  const swiper = new Swiper('.swiper-container', {
+    slidesPerView: 4,    // mỗi lần hiển thị 4 sản phẩm
+    spaceBetween: 20,    // khoảng cách giữa các slide
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    loop: false,  // hoặc true nếu bạn muốn trượt vòng
+    breakpoints: { 
+      768: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: 4,
+      }
+    }
+  });
+});
+
+  </script>
+  
+  
 </html>
